@@ -1,0 +1,37 @@
+package demo;
+
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.Stack;
+import java.io.*;
+public class main {
+	
+	static void deletedmid(Stack<Integer>st,int n,int curr) {
+		if(st.empty()||curr==n) {
+			return;
+		}
+		int x =st.peek();
+		st.pop();
+		deletedmid(st,n,curr+1);
+		if(curr!=(n/2)) {
+			st.push(x);
+		}
+	}
+	public static void main(String[]args) {
+		
+		Stack<Integer>st =new Stack<Integer>();
+		st.push(1);
+		st.push(2);
+		st.push(3);
+		st.push(4);
+		st.push(5);
+		int n=st.size();
+		int curr=0;
+		System.out.println(st);
+		deletedmid(st, n,  curr);
+		System.out.println(st);
+
+		
+	}
+}
+		
