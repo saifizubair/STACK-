@@ -1,0 +1,40 @@
+package demo;
+
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.Stack;
+import java.io.*;
+public class main {
+	static boolean isoprator(char x) {
+		switch(x) {
+		case '+':
+		case '-':
+		case '*':
+		case '/':
+			return true;
+		}
+		return false ;
+	}
+	static String convert(String exp) {
+		Stack<String>inf=new Stack<String>();
+		for(int i=exp.length()-1;i>=0;i--) {
+			char c =exp.charAt(i);
+			if(isoprator(c)) {
+				String val1 =inf.pop();
+				String val2 =inf.pop();
+				String temp ="("+val1+c+val2+")";
+				inf.push(temp);
+			}
+			else
+			{
+				inf.push(c+" ");
+			}
+		}
+		return inf.pop();
+	}
+	public static void main(String []args) {
+		
+		String exp ="*+abc";
+		System.out.print(convert(exp));
+	}
+}
