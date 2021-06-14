@@ -6,69 +6,33 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class Main {
-    static class stack{
-        int top;
-        int item[]=new int [100];
-        void push(int x){
-            if(top==99){
-                System.out.println("stack is full");
-            }
-            else {
-                item[++top]=x;
-            }
-        }
-        int pop(){
-            if(top==-1){
-                System.out.println("underflow condition");
-                return -1;
-            }
-            else {
-                int element = item[top];
-                top--;
-                return element;
-            }
 
-        }
-        boolean isempty(){
-            return (top==-1)?true:false;
-        }
-        static void printNGE(int arr[],int n){
-            int i=0;
-            stack s =new stack();
-            s.top=-1;
-            int element ,next;
-            s.push(arr[0]);
-            for( i=1;i<n;i++){
-                next=arr[i];
-                if(s.isempty()==false){
-                    element=s.pop();
-                    while (element<next){
-                        System.out.println(next);
-                        if(s.isempty()==true){
-                            break;
-                        }
-                        element=s.pop();
-                    }
-                    if(element>next){
-                        s.push(element);
-                    }
-                }
-                s.push(next);
-            }
-            while (s.isempty()==false){
-                element=s.pop();
-                next=-1;
-                System.out.println(next);
-            }
+    public static int[] NGE (int arr[]){
+        int nge[]=new int[arr.length];
+        Stack<Integer>st =new Stack<>();
+        nge[arr.length-1]=-1;
+        st.push(arr[arr.length-1]);
+       for (int i=arr.length-2;i>=0;i--){
+           while (st.size()>0&&arr[i]>=st.peek()){
+               st.pop();
+           }
+           if (st.size()>0){
+               nge[i]=st.peek();
+           }
+           else {
+               nge[i]=-1;
+           }
+           st.push(arr[i]);
+       }
 
-        }
-
+       return nge;
     }
-     public static void main(String[] args){
-int arr[]={11,13,21,3};
-int n=arr.length;
-stack.printNGE(arr ,n);
-    }
+    public static void main(String[] args) {
+        int arr[] = {5 ,5 ,3, 8, -2 ,7};
+        int res[]=NGE(arr);
+        for (int i=0;i< res.length;i++){
+            System.out.print(res[i]+" ");
+        }
 }
-
+}
 
